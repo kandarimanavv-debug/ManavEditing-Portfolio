@@ -347,7 +347,7 @@ export const allVideoProjects: VideoProject[] = [
       "Celebrity Documentary",
     ],
     cover_image: "hjtohuZYNsY",
-    publish_date: "2026 -08-01",
+    publish_date: "2026-08-01",
     client_name: "The Public Decoder",
     client_image: "/companies/raza-profile.jpg",
     client_feedback: "",

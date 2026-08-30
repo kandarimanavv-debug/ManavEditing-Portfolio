@@ -15,6 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 // const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://manav-portfolio.vercel.app"),
   title: {
     default: "Manav Kandari – Video Editor & Motion Graphics Designer",
     template: "%s | Manav Kandari",

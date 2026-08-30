@@ -1,3 +1,4 @@
+import type { ElementType } from "react";
 import {
   Award,
   Camera,
@@ -10,7 +11,35 @@ import {
   Zap,
 } from "lucide-react";
 
-export const videoEditingSkills = [
+export interface VideoEditingSkill {
+  name: string;
+  image_link: string;
+  icon: ElementType;
+  description: string;
+  color: string;
+}
+
+export interface Specialization {
+  title: string;
+  skills: string[];
+  icon: string;
+  description: string;
+}
+
+export interface Achievement {
+  title: string;
+  description: string;
+  icon: ElementType;
+  color: string;
+}
+
+export interface WorkflowStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+export const videoEditingSkills: VideoEditingSkill[] = [
   {
     name: "Adobe Illustrator",
     image_link: "/tools/illustrator_5611037.png",
@@ -50,14 +79,12 @@ export const videoEditingSkills = [
   },
 ];
 
-export const specializations = [
+export const specializations: Specialization[] = [
   {
     title: "YouTube Content Creation",
     skills: [
       "Documentary Editing",
       "Shorts",
-    ,
-      ,
     ],
     icon: "🎬",
     description:
@@ -68,14 +95,11 @@ export const specializations = [
     skills: [
       "Short-form Content",
       "Google/Meta Ads Video",
-      ,
-      ,
     ],
     icon: "📱",
     description:
       "Expert in creating content optimized for Instagram, Facebook, and other platforms.",
   },
-  ,
   {
     title: "Educational Content",
     skills: [
@@ -88,10 +112,9 @@ export const specializations = [
     description:
       "Specialized in making complex topics easy to understand through video",
   },
-  
 ];
 
-export const achievements = [
+export const achievements: Achievement[] = [
   {
     title: "50+ Projects Completed",
     description:
@@ -122,7 +145,7 @@ export const achievements = [
   },
 ];
 
-export const workflow = [
+export const workflow: WorkflowStep[] = [
   {
     step: "01",
     title: "Project Analysis",

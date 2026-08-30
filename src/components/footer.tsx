@@ -32,7 +32,7 @@ export default function Footer() {
     
     {
       name: "Email",
-      href: "mailto:.kandarimanavv@gmail.com",
+      href: "mailto:kandarimanavv@gmail.com",
       icon: Mail,
     },
   ];

@@ -112,35 +112,38 @@ export default function SkillsPage() {
             Specializations
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {specializations.map((spec, index) => (
-              <m.div
-                key={spec.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              >
-                <GlassmorphismCard className="p-6 h-full">
-                  <div className="text-3xl mb-4">{spec.icon}</div>
-                  <h3 className="text-lg font-semibold mb-3 text-white">
-                    {spec.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm mb-4">
-                    {spec.description}
-                  </p>
-                  <div className="space-y-2">
-                    {spec.skills.map((skill) => (
-                      <Badge
-                        key={skill}
-                        variant="outline"
-                        className="border-gray-600 text-gray-300 mr-2 mb-2"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </GlassmorphismCard>
-              </m.div>
-            ))}
+            {specializations.map((spec, index) => {
+              if (!spec) return null;
+              return (
+                <m.div
+                  key={spec.title || index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                >
+                  <GlassmorphismCard className="p-6 h-full">
+                    <div className="text-3xl mb-4">{spec.icon}</div>
+                    <h3 className="text-lg font-semibold mb-3 text-white">
+                      {spec.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      {spec.description}
+                    </p>
+                    <div className="space-y-2">
+                      {spec.skills?.map((skill) => (
+                        <Badge
+                          key={skill}
+                          variant="outline"
+                          className="border-gray-600 text-gray-300 mr-2 mb-2"
+                        >
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </GlassmorphismCard>
+                </m.div>
+              );
+            })}
           </div>
         </m.div>
 
