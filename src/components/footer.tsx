@@ -114,8 +114,8 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/5 mt-16 pt-8 text-center">
-          <p className="text-gray-500 text-sm flex items-center justify-center gap-1.5">
-            Made with 
+          <p className="text-gray-500 text-sm flex items-center justify-center gap-1.5 flex-wrap">
+            Made with
             <a
               href="https://www.linkedin.com/in/manavkandari/"
               target="_blank"
@@ -125,6 +125,16 @@ export default function Footer() {
               Manav
             </a>{" "}
             © {currentYear}
+            <span className="text-gray-700">·</span>
+            Developed by{" "}
+            <a
+              href="https://www.linkedin.com/in/vinit-rawat-105135327"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors underline decoration-dotted underline-offset-4"
+            >
+              Vinit Rawat
+            </a>
           </p>
         </div>
       </div>
