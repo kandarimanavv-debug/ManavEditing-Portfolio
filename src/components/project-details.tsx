@@ -14,6 +14,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import GlassmorphismCard from "@/components/glassmorphism-card";
+import InstagramEmbed from "@/components/instagram-embed";
 import {
     ArrowLeft,
     Play,
@@ -32,6 +33,7 @@ interface ProjectDetailsProps {
 
 export default function ProjectDetails({ project }: ProjectDetailsProps) {
     const [showVideo, setShowVideo] = useState(false);
+    const isInstagram = project.platform === "instagram";
     const embedUrl = getYouTubeEmbedUrl(project.video_link);
 
     return (
@@ -64,40 +66,46 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                     className="mb-8"
                 >
                     <GlassmorphismCard className="p-4 md:p-6">
-                        <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
-                            {showVideo && embedUrl ? (
-                                <iframe
-                                    src={`${embedUrl}?autoplay=1&modestbranding=1&rel=0`}
-                                    title={project.video_title}
-                                    className="w-full h-full"
-                                    allowFullScreen
-                                    allow="autoplay; encrypted-media"
-                                />
-                            ) : (
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src={
-                                            project.cover_image
-                                                ? `https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`
-                                                : "/placeholder.svg"
-                                        }
-                                        alt={project.video_title}
-                                        fill
-                                        className="object-cover"
+                        {isInstagram ? (
+                            <div className="flex justify-center py-4">
+                                <InstagramEmbed url={project.video_link} className="w-full flex justify-center" />
+                            </div>
+                        ) : (
+                            <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
+                                {showVideo && embedUrl ? (
+                                    <iframe
+                                        src={`${embedUrl}?autoplay=1&modestbranding=1&rel=0`}
+                                        title={project.video_title}
+                                        className="w-full h-full"
+                                        allowFullScreen
+                                        allow="autoplay; encrypted-media"
                                     />
-                                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                        <Button
-                                            onClick={() => setShowVideo(true)}
-                                            size="lg"
-                                            className="bg-red-600 hover:bg-red-700 cursor-pointer"
-                                        >
-                                            <Play className="mr-2" size={24} />
-                                            Play Video
-                                        </Button>
+                                ) : (
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={
+                                                project.cover_image
+                                                    ? `https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`
+                                                    : "/placeholder.svg"
+                                            }
+                                            alt={project.video_title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                            <Button
+                                                onClick={() => setShowVideo(true)}
+                                                size="lg"
+                                                className="bg-red-600 hover:bg-red-700 cursor-pointer"
+                                            >
+                                                <Play className="mr-2" size={24} />
+                                                Play Video
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
+                                )}
+                            </div>
+                        )}
                     </GlassmorphismCard>
                 </m.div>
 
@@ -191,14 +199,17 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Button asChild className="bg-red-600 hover:bg-red-700">
+                            <Button
+                                asChild
+                                className={isInstagram ? "bg-pink-600 hover:bg-pink-700" : "bg-red-600 hover:bg-red-700"}
+                            >
                                 <a
                                     href={project.video_link}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
                                     <ExternalLink className="mr-2" size={16} />
-                                    Watch on YouTube
+                                    {isInstagram ? "Watch on Instagram" : "Watch on YouTube"}
                                 </a>
                             </Button>
                         </div>

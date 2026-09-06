@@ -6,6 +6,7 @@ import Link from "next/link";
 import { m, AnimatePresence  } from "framer-motion";
 import { Play, X } from "lucide-react";
 import GlassmorphismCard from "@/components/glassmorphism-card";
+import InstagramEmbed from "@/components/instagram-embed";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VideoProject } from "@/types/videos";
@@ -17,6 +18,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
     const [isPlaying, setIsPlaying] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
+    const isInstagram = project.platform === "instagram";
 
     // Handle click outside to stop playing
     useEffect(() => {
@@ -53,6 +55,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <div className="flex flex-col h-full p-5">
                     {/* Media Area */}
                     <div className="relative overflow-hidden rounded-2xl aspect-video mb-5 shadow-lg bg-black isolate">
+                        {isInstagram ? (
+                            <div className="w-full h-full overflow-y-auto flex items-start justify-center bg-white">
+                                <InstagramEmbed url={project.video_link} className="w-full flex justify-center" />
+                            </div>
+                        ) : (
                         <AnimatePresence mode="wait">
                             {isPlaying ? (
                                 <m.div
@@ -114,6 +121,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                                 </div>
                             )}
                         </AnimatePresence>
+                        )}
                     </div>
 
                     {/* Content Area */}

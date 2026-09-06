@@ -13,6 +13,7 @@ export interface VideoProject {
   category: string[];
   duration?: string;
   software_used?: string[];
+  platform?: "youtube" | "instagram";
 }
 
 export interface Client {
