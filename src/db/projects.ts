@@ -193,5 +193,6 @@ export const allVideoProjects: VideoProject[] = [
     category: ["Shorts"],
     software_used: ["Adobe Premiere Pro"],
     platform: "instagram",
+    local_video: "/project-images/phz-obesity-reel.mp4",
   },
 ];

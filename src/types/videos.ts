@@ -14,6 +14,7 @@ export interface VideoProject {
   duration?: string;
   software_used?: string[];
   platform?: "youtube" | "instagram";
+  local_video?: string;
 }
 
 export interface Client {
