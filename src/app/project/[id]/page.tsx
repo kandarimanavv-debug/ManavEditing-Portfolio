@@ -35,7 +35,7 @@ export async function generateMetadata({
         {
           url:
             project.platform === "instagram"
-              ? project.cover_image
+              ? project.cover_image || "/placeholder.svg"
               : `https://img.youtube.com/vi/${project.cover_image}/maxresdefault.jpg`,
           width: 1280,
           height: 720,

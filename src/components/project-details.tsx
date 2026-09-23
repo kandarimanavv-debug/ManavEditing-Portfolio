@@ -14,6 +14,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import GlassmorphismCard from "@/components/glassmorphism-card";
+import InstagramEmbed from "@/components/instagram-embed";
 import {
     ArrowLeft,
     Play,
@@ -65,36 +66,42 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 >
                     <GlassmorphismCard className="p-4 md:p-6">
                         {isInstagram ? (
-                            <div className="relative mx-auto aspect-[9/16] max-h-[75vh] w-auto rounded-lg overflow-hidden bg-black">
-                                {showVideo && project.local_video ? (
-                                    <video
-                                        src={project.local_video}
-                                        controls
-                                        autoPlay
-                                        playsInline
-                                        className="w-full h-full object-contain"
-                                    />
-                                ) : (
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={project.cover_image || "/placeholder.svg"}
-                                            alt={project.video_title}
-                                            fill
-                                            className="object-cover"
+                            project.local_video ? (
+                                <div className="relative mx-auto aspect-[9/16] max-h-[75vh] w-auto rounded-lg overflow-hidden bg-black">
+                                    {showVideo ? (
+                                        <video
+                                            src={project.local_video}
+                                            controls
+                                            autoPlay
+                                            playsInline
+                                            className="w-full h-full object-contain"
                                         />
-                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                            <Button
-                                                onClick={() => setShowVideo(true)}
-                                                size="lg"
-                                                className="bg-pink-600 hover:bg-pink-700 cursor-pointer"
-                                            >
-                                                <Play className="mr-2" size={24} />
-                                                Play Video
-                                            </Button>
+                                    ) : (
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src={project.cover_image || "/placeholder.svg"}
+                                                alt={project.video_title}
+                                                fill
+                                                className="object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                                <Button
+                                                    onClick={() => setShowVideo(true)}
+                                                    size="lg"
+                                                    className="bg-pink-600 hover:bg-pink-700 cursor-pointer"
+                                                >
+                                                    <Play className="mr-2" size={24} />
+                                                    Play Video
+                                                </Button>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                            </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="flex justify-center py-4">
+                                    <InstagramEmbed url={project.video_link} className="w-full flex justify-center" />
+                                </div>
+                            )
                         ) : (
                             <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-900">
                                 {showVideo && embedUrl ? (

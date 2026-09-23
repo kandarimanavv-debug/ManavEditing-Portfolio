@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { m, AnimatePresence  } from "framer-motion";
 import { Play, X } from "lucide-react";
 import GlassmorphismCard from "@/components/glassmorphism-card";
+import InstagramEmbed from "@/components/instagram-embed";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VideoProject } from "@/types/videos";
@@ -57,25 +58,31 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     {/* Media Area */}
                     <div className="relative overflow-hidden rounded-2xl aspect-video mb-5 shadow-lg bg-black isolate">
                         {isInstagram ? (
-                            <div
-                                className="relative w-full h-full cursor-pointer group/thumb"
-                                onClick={() => router.push(`/project/${project.id}`)}
-                            >
-                                <Image
-                                    src={project.cover_image}
-                                    alt={project.video_title}
-                                    fill
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover/thumb:scale-110"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                />
+                            project.local_video ? (
+                                <div
+                                    className="relative w-full h-full cursor-pointer group/thumb"
+                                    onClick={() => router.push(`/project/${project.id}`)}
+                                >
+                                    <Image
+                                        src={project.cover_image}
+                                        alt={project.video_title}
+                                        fill
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover/thumb:scale-110"
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
 
-                                {/* Play Button Overlay */}
-                                <div className="absolute inset-0 bg-black/20 group-hover/thumb:bg-black/40 transition-colors duration-300 flex items-center justify-center backdrop-blur-[0px] group-hover/thumb:backdrop-blur-[2px]">
-                                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white transform scale-90 group-hover/thumb:scale-110 transition-all duration-300 shadow-xl shadow-black/20">
-                                        <Play className="ml-1 fill-white" size={28} />
+                                    {/* Play Button Overlay */}
+                                    <div className="absolute inset-0 bg-black/20 group-hover/thumb:bg-black/40 transition-colors duration-300 flex items-center justify-center backdrop-blur-[0px] group-hover/thumb:backdrop-blur-[2px]">
+                                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white transform scale-90 group-hover/thumb:scale-110 transition-all duration-300 shadow-xl shadow-black/20">
+                                            <Play className="ml-1 fill-white" size={28} />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="w-full h-full overflow-y-auto flex items-start justify-center bg-white">
+                                    <InstagramEmbed url={project.video_link} className="w-full flex justify-center" />
+                                </div>
+                            )
                         ) : (
                         <AnimatePresence mode="wait">
                             {isPlaying ? (
