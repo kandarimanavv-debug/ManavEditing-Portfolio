@@ -75,13 +75,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                                         <Play className="ml-1 fill-white" size={28} />
                                     </div>
                                 </div>
-
-                                {/* Duration Badge */}
-                                {project.duration && (
-                                    <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2 py-1 rounded-md">
-                                        {project.duration}
-                                    </div>
-                                )}
                             </div>
                         ) : (
                         <AnimatePresence mode="wait">
@@ -135,13 +128,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                                             <Play className="ml-1 fill-white" size={28} />
                                         </div>
                                     </div>
-
-                                    {/* Duration Badge */}
-                                    {project.duration && (
-                                        <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm border border-white/10 text-white text-[10px] font-bold px-2 py-1 rounded-md">
-                                            {project.duration}
-                                        </div>
-                                    )}
                                 </div>
                             )}
                         </AnimatePresence>

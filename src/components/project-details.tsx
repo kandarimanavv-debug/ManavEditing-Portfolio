@@ -17,7 +17,6 @@ import GlassmorphismCard from "@/components/glassmorphism-card";
 import {
     ArrowLeft,
     Play,
-    Clock,
     User,
     Calendar,
     Quote,
@@ -144,14 +143,6 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 >
                     <GlassmorphismCard className="p-6 md:p-8">
                         <div className="mb-6">
-                            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-end mb-4 gap-4">
-                                {project.duration && (
-                                    <div className="flex items-center text-gray-400 text-sm">
-                                        <Clock className="mr-1" size={14} />
-                                        {project.duration}
-                                    </div>
-                                )}
-                            </div>
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">
                                 {project.video_title}
                             </h1>
