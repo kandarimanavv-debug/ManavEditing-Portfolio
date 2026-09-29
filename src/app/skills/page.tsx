@@ -19,6 +19,10 @@ import {
   Star,
 } from "lucide-react";
 import CTASection from "@/components/CTASection";
+import SplitText from "@/components/motion/split-text";
+import TiltCard from "@/components/motion/tilt-card";
+import ToolOrbit from "@/components/motion/tool-orbit";
+import { EASE_OUT, Reveal } from "@/components/motion/reveal";
 import {
   videoEditingSkills,
   specializations,
@@ -35,152 +39,147 @@ const iconMap = [
   { icon: <Send size={20} />, bg: "#6366f1" }, // Final Delivery
 ];
 
+const SPIN_ON_HOVER =
+  "transition-transform duration-700 [transform:perspective(500px)_rotateY(0deg)] group-hover:[transform:perspective(500px)_rotateY(360deg)]";
+
+function SectionTitle({ text }: { text: string }) {
+  return (
+    <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
+      <SplitText parts={[{ text }]} />
+    </h2>
+  );
+}
+
 export default function SkillsPage() {
   return (
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Hero Section */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-          className="text-center mb-24 relative"
-        >
+        <div className="text-center mb-10 relative">
           {/* Spotlight Effect behind title */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/15 blur-[100px] rounded-full pointer-events-none" />
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mt-0 md:mt-16 mb-6 text-white tracking-tight relative z-10">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-gray-400 bg-clip-text text-transparent">
-              My Skills & Expertise
-            </span>
+            <SplitText
+              parts={[
+                {
+                  text: "My Skills & Expertise",
+                  className: "bg-gradient-to-r from-white via-blue-100 to-gray-400 bg-clip-text text-transparent pb-[0.1em]",
+                },
+              ]}
+            />
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed relative z-10">
-            With years of experience in video editing, I bring technical expertise and creative vision to every project.
-            Here's what I can do for you.
-          </p>
+          <Reveal delay={0.3}>
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+              With years of experience in video editing, I bring technical expertise and creative vision to every project.
+              Here's what I can do for you.
+            </p>
+          </Reveal>
+        </div>
+
+        <m.div
+          initial={{ opacity: 0, scale: 0.7, rotateX: 40 }}
+          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+          transition={{ duration: 1.4, ease: EASE_OUT, delay: 0.4 }}
+          style={{ transformPerspective: 1200 }}
+          className="mb-16"
+        >
+          <ToolOrbit />
         </m.div>
 
         {/* Technical Skills */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
-            Technical Skills
-          </h2>
+        <div className="mb-20">
+          <SectionTitle text="Technical Skills" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {videoEditingSkills.map((skill, index) => (
-              <m.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <GlassmorphismCard className="p-6">
-                  <div className="flex items-center mb-4 space-x-4">
-                    <div className="relative w-12 md:w-16 h-12 md:h-16">
-                      <Image
-                        src={skill.image_link}
-                        alt={skill.name}
-                        fill
-                        className="object-contain"
-                      />
+              <Reveal key={skill.name} variant="flip" delay={(index % 2) * 0.12} className="h-full">
+                <TiltCard className="h-full">
+                  <GlassmorphismCard className="group p-6 h-full">
+                    <div className="flex items-center mb-4 space-x-4">
+                      <div className={`relative w-12 md:w-16 h-12 md:h-16 ${SPIN_ON_HOVER}`}>
+                        <Image
+                          src={skill.image_link}
+                          alt={skill.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                      <h3 className="text-lg font-semibold text-white">
+                        {skill.name}
+                      </h3>
                     </div>
-                    <h3 className="text-lg font-semibold text-white">
-                      {skill.name}
-                    </h3>
-                  </div>
-                  <p className="text-gray-400 text-sm mb-4">
-                    {skill.description}
-                  </p>
-                </GlassmorphismCard>
-              </m.div>
+                    <p className="text-gray-400 text-sm mb-4">
+                      {skill.description}
+                    </p>
+                  </GlassmorphismCard>
+                </TiltCard>
+              </Reveal>
             ))}
           </div>
-        </m.div>
+        </div>
 
         {/* Specializations */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
-            Specializations
-          </h2>
+        <div className="mb-20">
+          <SectionTitle text="Specializations" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {specializations.map((spec, index) => {
               if (!spec) return null;
               return (
-                <m.div
-                  key={spec.title || index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                >
-                  <GlassmorphismCard className="p-6 h-full">
-                    <div className="text-3xl mb-4">{spec.icon}</div>
-                    <h3 className="text-lg font-semibold mb-3 text-white">
-                      {spec.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mb-4">
-                      {spec.description}
-                    </p>
-                    <div className="space-y-2">
-                      {spec.skills?.map((skill) => (
-                        <Badge
-                          key={skill}
-                          variant="outline"
-                          className="border-gray-600 text-gray-300 mr-2 mb-2"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </GlassmorphismCard>
-                </m.div>
+                <Reveal key={spec.title || index} variant="flip" delay={(index % 3) * 0.12} className="h-full">
+                  <TiltCard className="h-full">
+                    <GlassmorphismCard className="group p-6 h-full">
+                      <div className={`inline-block text-3xl mb-4 ${SPIN_ON_HOVER}`}>{spec.icon}</div>
+                      <h3 className="text-lg font-semibold mb-3 text-white">
+                        {spec.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-4">
+                        {spec.description}
+                      </p>
+                      <div className="space-y-2">
+                        {spec.skills?.map((skill) => (
+                          <Badge
+                            key={skill}
+                            variant="outline"
+                            className="border-gray-600 text-gray-300 mr-2 mb-2"
+                          >
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </GlassmorphismCard>
+                  </TiltCard>
+                </Reveal>
               );
             })}
           </div>
-        </m.div>
+        </div>
 
         {/* Achievements */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
-            Achievements
-          </h2>
+        <div className="mb-20">
+          <SectionTitle text="Achievements" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
-              <m.div
-                key={achievement.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.0 + index * 0.1 }}
-              >
-                <GlassmorphismCard className="p-6 text-center h-full">
-                  <achievement.icon
-                    className={`${achievement.color} mx-auto mb-4`}
-                    size={32}
-                  />
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    {achievement.description}
-                  </p>
-                </GlassmorphismCard>
-              </m.div>
+              <Reveal key={achievement.title} variant="zoom" delay={(index % 4) * 0.1} className="h-full">
+                <TiltCard className="h-full" max={10}>
+                  <GlassmorphismCard className="group p-6 text-center h-full">
+                    <div className={`mx-auto mb-4 w-fit ${SPIN_ON_HOVER}`}>
+                      <achievement.icon
+                        className={achievement.color}
+                        size={32}
+                      />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2 text-white">
+                      {achievement.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {achievement.description}
+                    </p>
+                  </GlassmorphismCard>
+                </TiltCard>
+              </Reveal>
             ))}
           </div>
-        </m.div>
+        </div>
 
         {/* Workflow */}
         {/* <m.div
@@ -218,50 +217,45 @@ export default function SkillsPage() {
           </div>
         </m.div> */}
 
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
-            My Workflow
-          </h2>
+        <div className="mb-20">
+          <SectionTitle text="My Workflow" />
 
-          <GlassmorphismCard className="p-4 md:p-8">
-            <VerticalTimeline animate={true} lineColor="#3b82f6">
-              {workflow.map((step, index) => (
+          <Reveal amount={0.1}>
+            <GlassmorphismCard className="p-4 md:p-8">
+              <VerticalTimeline animate={true} lineColor="#3b82f6">
+                {workflow.map((step, index) => (
+                  <VerticalTimelineElement
+                    key={step.step}
+                    className="vertical-timeline-element--work"
+                    date={`Step ${step.step}`}
+                    contentStyle={{
+                      background: "rgb(30, 41, 59)",
+                      color: "#fff",
+                    }}
+                    contentArrowStyle={{
+                      borderRight: "7px solid rgb(30, 41, 59)",
+                    }}
+                    iconStyle={{
+                      background: iconMap[index]?.bg || "#3b82f6",
+                      color: "#fff",
+                    }}
+                    icon={iconMap[index]?.icon || <Star size={20} />}
+                  >
+                    <h3 className="vertical-timeline-element-title text-white text-lg font-semibold">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-300">{step.description}</p>
+                  </VerticalTimelineElement>
+                ))}
+
                 <VerticalTimelineElement
-                  key={step.step}
-                  className="vertical-timeline-element--work"
-                  date={`Step ${step.step}`}
-                  contentStyle={{
-                    background: "rgb(30, 41, 59)",
-                    color: "#fff",
-                  }}
-                  contentArrowStyle={{
-                    borderRight: "7px solid rgb(30, 41, 59)",
-                  }}
-                  iconStyle={{
-                    background: iconMap[index]?.bg || "#3b82f6",
-                    color: "#fff",
-                  }}
-                  icon={iconMap[index]?.icon || <Star size={20} />}
-                >
-                  <h3 className="vertical-timeline-element-title text-white text-lg font-semibold">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-300">{step.description}</p>
-                </VerticalTimelineElement>
-              ))}
-
-              <VerticalTimelineElement
-                iconStyle={{ background: "rgb(34,197,94)", color: "#fff" }}
-                icon={<Star size={20} />}
-              />
-            </VerticalTimeline>
-          </GlassmorphismCard>
-        </m.div>
+                  iconStyle={{ background: "rgb(34,197,94)", color: "#fff" }}
+                  icon={<Star size={20} />}
+                />
+              </VerticalTimeline>
+            </GlassmorphismCard>
+          </Reveal>
+        </div>
 
         {/* CTA Section */}
         <CTASection

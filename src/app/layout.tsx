@@ -10,6 +10,7 @@ import Footer from "@/components/footer";
 import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
 import FramerLazyMotion from "@/components/framer-lazy-motion";
+import ScrollProgress from "@/components/motion/scroll-progress";
 
 const inter = Inter({ subsets: ["latin"] });
 // const nunito = Nunito({ subsets: ["latin"] });
@@ -130,9 +131,10 @@ export default function RootLayout({
           backgroundAttachment: "fixed",
         }}
       >
-        <div className="grid-background-large min-h-screen">
+        <div className="grid-background-large min-h-screen overflow-x-clip">
           <SmoothScroll>
             <FramerLazyMotion>
+              <ScrollProgress />
               <MouseMoveEffect />
               <Navbar />
               <main className="">{children}</main>

@@ -8,6 +8,7 @@ import { m, AnimatePresence  } from "framer-motion";
 import { Play, X } from "lucide-react";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import InstagramEmbed from "@/components/instagram-embed";
+import TiltCard from "@/components/motion/tilt-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VideoProject } from "@/types/videos";
@@ -53,6 +54,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
     return (
         <div ref={cardRef} className="h-full">
+            <TiltCard className="h-full" max={7} disabled={isPlaying}>
             <GlassmorphismCard className="h-full group hover:shadow-2xl hover:shadow-blue-900/10 transition-shadow duration-500 flex flex-col">
                 <div className="flex flex-col h-full p-5">
                     {/* Media Area */}
@@ -195,6 +197,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     </div>
                 </div>
             </GlassmorphismCard>
+            </TiltCard>
         </div>
     );
 }

@@ -329,6 +329,83 @@
   .hero-rise { opacity: 0.5; }
 }
 
+/* Skills ribbon */
+@keyframes ribbon-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.ribbon-track { animation: ribbon-scroll 38s linear infinite; }
+.ribbon-track-reverse { animation-direction: reverse; }
+
+/* Tool orbit: the ring spins while each item counter-rotates to keep facing the viewer */
+@keyframes orbit-spin {
+  from { transform: rotateX(-14deg) rotateY(0deg); }
+  to { transform: rotateX(-14deg) rotateY(360deg); }
+}
+
+@keyframes orbit-counter {
+  from { transform: rotateY(calc(-1 * var(--a))) rotateX(14deg); }
+  to { transform: rotateY(calc(-1 * var(--a) - 360deg)) rotateX(14deg); }
+}
+
+@keyframes orbit-depth {
+  0%, 100% { opacity: 1; filter: blur(0) brightness(1.1); }
+  25%, 75% { opacity: 0.8; filter: blur(0.5px) brightness(0.85); }
+  50% { opacity: 0.35; filter: blur(2px) brightness(0.6); }
+}
+
+.tool-orbit-ring {
+  transform: rotateX(-14deg);
+  animation: orbit-spin 28s linear infinite;
+}
+
+.tool-orbit-item {
+  transform: rotateY(calc(-1 * var(--a))) rotateX(14deg);
+  animation: orbit-counter 28s linear infinite, orbit-depth 28s linear infinite;
+}
+
+.tool-orbit:hover .tool-orbit-ring,
+.tool-orbit:hover .tool-orbit-item {
+  animation-play-state: paused;
+}
+
+/* 3D orbit rings (CTA) */
+@keyframes gyro-spin {
+  from { transform: rotateX(68deg) rotateZ(0deg); }
+  to { transform: rotateX(68deg) rotateZ(360deg); }
+}
+
+@keyframes gyro-spin-alt {
+  from { transform: rotateY(64deg) rotateZ(360deg); }
+  to { transform: rotateY(64deg) rotateZ(0deg); }
+}
+
+.gyro { transform: rotateX(68deg); animation: gyro-spin 14s linear infinite; }
+.gyro-alt { transform: rotateY(64deg); animation: gyro-spin-alt 18s linear infinite; }
+
+/* Radar ping */
+@keyframes radar-ping {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.radar-ping { animation: radar-ping 2.6s ease-out infinite both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-track,
+  .tool-orbit-ring,
+  .tool-orbit-item,
+  .gyro,
+  .gyro-alt,
+  .radar-ping,
+  .animate-float {
+    animation: none;
+  }
+
+  .radar-ping { opacity: 0; }
+}
+
 /* Override overrides */
 .text-gray-300 {
   color: #d1d5db !important;

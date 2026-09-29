@@ -1,10 +1,12 @@
 "use client";
 
-import { m } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import GlassmorphismCard from "@/components/glassmorphism-card";
+import SplitText from "@/components/motion/split-text";
+import TiltCard from "@/components/motion/tilt-card";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
 import { toast } from "sonner"
 
@@ -56,41 +58,39 @@ export default function ContactPage() {
     <div className="min-h-screen py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Hero Section */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-          className="text-center mb-24 relative"
-        >
+        <div className="text-center mb-24 relative">
           {/* Spotlight Effect behind title */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-purple-500/15 blur-[100px] rounded-full pointer-events-none" />
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mt-0 md:mt-16 mb-6 text-white tracking-tight relative z-10">
-            <span className="bg-gradient-to-r from-white via-purple-100 to-gray-400 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
+            <SplitText
+              parts={[
+                {
+                  text: "Get In Touch",
+                  className: "bg-gradient-to-r from-white via-purple-100 to-gray-400 bg-clip-text text-transparent",
+                },
+              ]}
+            />
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed relative z-10">
-            Have a project in mind or want to collaborate? I'd love to hear from
-            you. Let's create something amazing together!
-          </p>
-        </m.div>
+          <Reveal delay={0.3}>
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+              Have a project in mind or want to collaborate? I'd love to hear from
+              you. Let's create something amazing together!
+            </p>
+          </Reveal>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12 justify-center items-center">
           {/* Contact Info */}
-          <m.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-8"
-          >
+          <Reveal variant="left" delay={0.2} duration={1.1} className="space-y-8">
+            <TiltCard max={6}>
             <GlassmorphismCard className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-white">
                 Contact Information
               </h3>
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="bg-blue-600 p-3 rounded-lg">
+              <RevealGroup className="space-y-6" delay={0.5}>
+                <RevealItem variant="left" className="flex items-center space-x-4">
+                  <div className="bg-blue-600 p-3 rounded-lg animate-float">
                     <Mail className="text-white" size={20} />
                   </div>
                   <div>
@@ -102,10 +102,10 @@ export default function ContactPage() {
                       kandarimanavv@gmail.com
                     </a>
                   </div>
-                </div>
+                </RevealItem>
 
-                <div className="flex items-center space-x-4">
-                  <div className="bg-green-600 p-3 rounded-lg">
+                <RevealItem variant="left" className="flex items-center space-x-4">
+                  <div className="bg-green-600 p-3 rounded-lg animate-float [animation-delay:-2.5s]">
                     <MessageCircle className="text-white" size={20} />
                   </div>
                   <div>
@@ -119,22 +119,24 @@ export default function ContactPage() {
                       +91 9654275166
                     </a>
                   </div>
-                </div>
+                </RevealItem>
 
-                
 
-                <div className="flex items-center space-x-4">
-                  <div className="bg-orange-600 p-3 rounded-lg">
+
+                <RevealItem variant="left" className="flex items-center space-x-4">
+                  <div className="bg-orange-600 p-3 rounded-lg animate-float [animation-delay:-5s]">
                     <Clock className="text-white" size={20} />
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">Availability</p>
                     <p className="text-white">Flexible with time zones</p>
                   </div>
-                </div>
-              </div>
+                </RevealItem>
+              </RevealGroup>
             </GlassmorphismCard>
+            </TiltCard>
 
+            <TiltCard max={6}>
             <GlassmorphismCard className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-white">
                 Why Choose Me?
@@ -173,14 +175,11 @@ export default function ContactPage() {
                 </div>
               </div>
             </GlassmorphismCard>
-          </m.div>
+            </TiltCard>
+          </Reveal>
 
           {/* Contact Form */}
-          <m.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
+          <Reveal variant="right" delay={0.35} duration={1.1}>
             <GlassmorphismCard className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-white">
                 Send Message
@@ -313,7 +312,7 @@ export default function ContactPage() {
                 </p>
               </div>
             </GlassmorphismCard>
-          </m.div>
+          </Reveal>
         </div>
 
         {/* FAQ Section */}

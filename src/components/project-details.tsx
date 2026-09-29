@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/carousel";
 import GlassmorphismCard from "@/components/glassmorphism-card";
 import InstagramEmbed from "@/components/instagram-embed";
+import SplitText from "@/components/motion/split-text";
+import { EASE_OUT, Reveal } from "@/components/motion/reveal";
 import {
     ArrowLeft,
     Play,
@@ -59,9 +61,10 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
 
                 {/* Video Player Section */}
                 <m.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    initial={{ opacity: 0, y: 70, rotateX: 22, scale: 0.94 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                    transition={{ duration: 1.1, ease: EASE_OUT }}
+                    style={{ transformPerspective: 1400, transformOrigin: "50% 0%" }}
                     className="mb-8"
                 >
                     <GlassmorphismCard className="p-4 md:p-6">
@@ -142,16 +145,11 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 </m.div>
 
                 {/* Project Details Section */}
-                <m.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="mb-8"
-                >
+                <Reveal variant="flip" delay={0.25} amount={0.1} className="mb-8">
                     <GlassmorphismCard className="p-6 md:p-8">
                         <div className="mb-6">
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white">
-                                {project.video_title}
+                                <SplitText parts={[{ text: project.video_title }]} delay={0.4} stagger={0.05} />
                             </h1>
                             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
                                 {project.video_description}
@@ -238,16 +236,11 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                             </Button>
                         </div>
                     </GlassmorphismCard>
-                </m.div>
+                </Reveal>
 
                 {/* Project Gallery */}
                 {project.project_images && project.project_images.length > 0 && (
-                    <m.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="mt-16"
-                    >
+                    <Reveal variant="flip" className="mt-16">
                         <GlassmorphismCard className="p-8">
                             <h3 className="text-2xl font-semibold mb-6 text-white text-center">
                                 Project Gallery
@@ -273,17 +266,12 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                                 <CarouselNext className="cursor-pointer" />
                             </Carousel>
                         </GlassmorphismCard>
-                    </m.div>
+                    </Reveal>
                 )}
 
                 {/* Client Feedback */}
                 {project.client_feedback && (
-                    <m.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="mt-16"
-                    >
+                    <Reveal variant="flip" className="mt-16">
                         <GlassmorphismCard className="p-8">
                             <h3 className="text-2xl font-semibold mb-6 text-white text-center">
                                 Client Feedback
@@ -314,7 +302,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                                 </div>
                             </div>
                         </GlassmorphismCard>
-                    </m.div>
+                    </Reveal>
                 )}
             </div>
         </div>

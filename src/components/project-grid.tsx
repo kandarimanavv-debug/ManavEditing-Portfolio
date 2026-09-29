@@ -5,6 +5,7 @@ import { m } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/project-card";
+import { EASE_OUT } from "@/components/motion/reveal";
 import type { VideoProject } from "@/types/videos";
 import { getVideoProjectsByCategory } from "@/lib/helper";
 
@@ -75,17 +76,25 @@ export default function ProjectGrid({ initialCategories, initialProjects }: Proj
     <>
         {/* Category Filter */}
         <m.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } } }}
             className="flex flex-wrap justify-center gap-3 mb-16"
         >
             {initialCategories.map(({ category, count }) => (
-            <button
+            <m.button
                 key={category}
+                variants={{
+                    hidden: { opacity: 0, y: 24, rotateX: -70 },
+                    show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease: EASE_OUT } },
+                }}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ transformPerspective: 600 }}
                 onClick={() => setSelectedCategory(category)}
                 className={`
-                relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                relative px-5 py-2.5 rounded-full text-sm font-medium transition-[background-color,color,box-shadow,scale] duration-300
                 ${selectedCategory === category
                     ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
                     : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5"
@@ -99,7 +108,7 @@ export default function ProjectGrid({ initialCategories, initialProjects }: Proj
                 `}>
                 {count}
                 </span>
-            </button>
+            </m.button>
             ))}
         </m.div>
 
@@ -112,9 +121,11 @@ export default function ProjectGrid({ initialCategories, initialProjects }: Proj
             <m.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 90, rotateX: 28, scale: 0.94 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.95, ease: EASE_OUT, delay: (index % 3) * 0.12 }}
+                style={{ transformPerspective: 1200, transformOrigin: "50% 100%" }}
             >
                 <ProjectCard project={project} />
             </m.div>
