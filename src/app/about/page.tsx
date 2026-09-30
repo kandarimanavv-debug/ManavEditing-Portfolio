@@ -180,10 +180,10 @@ export default function AboutPage() {
                 title="Connect"
                 description=""
                 header={
-                  <div className="flex flex-1 h-full w-full items-center justify-between px-6 bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-xl border border-white/5 py-4 md:py-0 min-h-[5rem]">
-                    <a href="https://www.linkedin.com/in/manavkandari" target="_blank" aria-label="LinkedIn" className={`p-3 bg-white/5 rounded-full hover:bg-[#0077b5] text-white ${SOCIAL_FLIP}`}><Linkedin size={20} /></a>
-                    <a href="https://www.instagram.com/graphicx_boy/" target="_blank" aria-label="Instagram" className={`p-3 bg-white/5 rounded-full hover:bg-pink-600 text-white ${SOCIAL_FLIP}`}><Instagram size={20} /></a>
-                    <a href="https://www.youtube.com/@Kandari_Manav" target="_blank" aria-label="YouTube" className={`p-3 bg-white/5 rounded-full hover:bg-red-600 text-white ${SOCIAL_FLIP}`}><Youtube size={20} /></a>
+                  <div className="flex flex-1 h-full w-full items-center justify-between px-6 bg-gradient-to-br from-[#0b1a3a]/80 via-[#0a1330]/70 to-[#1e1b4b]/60 rounded-xl border border-[#4fb8ff]/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_0_30px_-12px_rgba(79,184,255,0.35)] py-4 md:py-0 min-h-[5rem]">
+                    <a href="https://www.linkedin.com/in/manavkandari" target="_blank" aria-label="LinkedIn" className={`p-3 bg-white/10 ring-1 ring-white/10 rounded-full hover:bg-[#0077b5] text-white ${SOCIAL_FLIP}`}><Linkedin size={20} /></a>
+                    <a href="https://www.instagram.com/graphicx_boy/" target="_blank" aria-label="Instagram" className={`p-3 bg-white/10 ring-1 ring-white/10 rounded-full hover:bg-pink-600 text-white ${SOCIAL_FLIP}`}><Instagram size={20} /></a>
+                    <a href="https://www.youtube.com/@Kandari_Manav" target="_blank" aria-label="YouTube" className={`p-3 bg-white/10 ring-1 ring-white/10 rounded-full hover:bg-red-600 text-white ${SOCIAL_FLIP}`}><Youtube size={20} /></a>
                   </div>
                 }
                 className="h-full"
